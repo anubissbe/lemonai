@@ -3,6 +3,8 @@ require('dotenv').config();
 const { logging } = require("@src/logger/index");
 global.logging = logging;
 
+require('@src/models/sync.js');
+
 const Koa = require('koa')
 const app = new Koa()
 const json = require('koa-json')

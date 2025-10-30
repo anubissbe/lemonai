@@ -4,6 +4,7 @@ const { expect } = require("chai");
 
 const app = require("../../../src/app"); // reference to your app instance in the project
 const Platform = require("@src/models/Platform");
+const Model = require("@src/models/Model");
 
 describe("Platform Routes", () => {
   let server;
@@ -75,6 +76,7 @@ describe("Platform Routes", () => {
       destroy: sinon.stub().resolves(),
     };
     sinon.stub(Platform, "findOne").resolves(mockPlatform);
+    sinon.stub(Model, "destroy").resolves();
 
     const res = await request(server).delete("/api/platform/1");
 

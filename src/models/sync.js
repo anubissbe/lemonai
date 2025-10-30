@@ -1,6 +1,8 @@
 require("module-alias/register");
 require('dotenv').config();
 
+const crypto = require('crypto');
+
 const Conversation = require('./Conversation');
 const File = require('./File');
 const Platform = require('./Platform');
@@ -82,9 +84,17 @@ const dataSync = async () => {
 
   const userCount = await User.count();
   if (userCount === 0) {
+    const defaultPassword = crypto.createHash('md5').update('admin123').digest('hex');
     await User.create({
       id: 1,
-      user_salt: 'default123'
+      user_name: 'Administrator',
+      user_nickname: 'Administrator',
+      user_email: 'admin@example.com',
+      user_password: defaultPassword,
+      user_salt: 'local',
+      user_status: 1,
+      created_at: new Date(),
+      updated_at: new Date(),
     });
   }
 }
