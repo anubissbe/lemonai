@@ -56,8 +56,13 @@ instance.interceptors.response.use(
     }else if(res.config.url == '/api/model'){
       return res.data;
     }
-    if (res.data.data) {
-      return res.data.data;
+    if (res.data && typeof res.data === 'object') {
+      if (typeof res.data.code !== 'undefined') {
+        return res.data;
+      }
+      if (res.data.data) {
+        return res.data.data;
+      }
     }
     return res;
   },

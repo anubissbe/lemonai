@@ -105,7 +105,6 @@
 </template>
 <script setup>
 import { computed, reactive,ref } from 'vue';
-import google from '@/assets/svg/google.svg';
 import { message } from 'ant-design-vue';
 import { MobileOutlined } from '@ant-design/icons-vue';
 //判断是国内还是海外 VITE_REGION

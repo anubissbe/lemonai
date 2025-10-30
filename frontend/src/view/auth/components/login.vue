@@ -1,22 +1,6 @@
 <template>
     <div>
         <!-- Login Form -->
-        <div class="social-buttons">
-            <a-button class="social-button google" @click="handleGoogleLogin" v-if="isAbroad">
-                <template #icon>
-                    <google />
-                </template>
-                {{ $t('auth.loginWithGoogle') }}
-            </a-button>
-            <!-- Apple login button hidden as requested -->
-            <!-- 手机号+短信验证码  登录 -->
-            <a-button class="social-button phone" @click="handleSMSLogin" v-if="!isAbroad">
-                <template #icon>
-                    <MobileOutlined />
-                </template>
-                {{ $t('auth.loginWithPhone') }}
-            </a-button>
-        </div>
         <div class="divider">
             <span>{{ $t('auth.or') }}</span>
         </div>
@@ -74,14 +58,12 @@
 </template>
 <script setup>
 import { computed, reactive, ref } from 'vue';
-import google from '@/assets/svg/google.svg';
-import { MobileOutlined } from '@ant-design/icons-vue';
 //判断是国内还是海外 VITE_REGION
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
-const emit = defineEmits(['toRegister','toForgot','handleLogin','handleGoogleLogin']);
+const emit = defineEmits(['toRegister','toForgot','handleLogin']);
 
 // 登录表单
 const loginForm = reactive({
@@ -108,12 +90,6 @@ const handleLogin = (value) => {
     emit("handleLogin",value)
 };
 
-const handleSMSLogin = () => {
-    emit('handleSMSLogin');
-};
-const handleGoogleLogin = () => {
-    emit('handleGoogleLogin');
-};
 const toRegister = () => {
     emit('toRegister');
 };
@@ -124,34 +100,6 @@ const toForgot = () => {
 
 </script>
 <style lang="scss" scoped>
-.social-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 24px;
-    align-items: center;
-
-    .social-button {
-        width: 100%;
-        height: 40px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        color: #333;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        border: none;
-        background-color: white;
-        color: #333;
-        img {
-            margin-right: 6px;
-        }
-    }
-
-}
-
-
 :deep(.ant-form-item-control-input-content) {
     width: 360px;
 }

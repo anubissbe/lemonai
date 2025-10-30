@@ -10,14 +10,11 @@
       <!-- Title -->
       <h2 class="auth-title">{{ pageTitle }}</h2>
       <div v-if="activeKey === 'login'">
-        <login @toRegister="activeKey = 'register'" @handleLogin="handleLogin" @toForgot="activeKey = 'forgot'" @handleGoogleLogin="handleGoogleLogin" @handleSMSLogin="activeKey = 'smsLogin'" />
-      </div>
-      <div v-if="activeKey === 'smsLogin'">
-        <smsLogin @toLogin="activeKey = 'login'" @handleLoginSMSCode="handleLoginSMSCode" />
+        <login @toRegister="activeKey = 'register'" @handleLogin="handleLogin" @toForgot="activeKey = 'forgot'" />
       </div>
       <div v-if="activeKey === 'register'">
         <!-- Register Form -->
-        <register @toLogin="activeKey = 'login'" @handleRegister="handleRegister" @handleGoogleRegister="handleGoogleLogin"/>
+        <register @toLogin="activeKey = 'login'" @handleRegister="handleRegister" />
       </div>
       <div v-if="activeKey === 'forgot'">
         <forgot @toLogin="activeKey = 'login'" @handleForgotPassword="handleForgotPassword"/>
@@ -53,8 +50,6 @@
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue';
 import logo from '@/assets/image/lemon.jpg';
-import google from '@/assets/svg/google.svg';
-
 // import apple from '@/assets/svg/apple.svg';
 import { useRouter } from 'vue-router';
 import { message } from 'ant-design-vue';
@@ -63,7 +58,6 @@ import auth from '@/services/auth';
 import login from './components/login.vue'
 import register from './components/register.vue'
 import forgot from './components/forgot.vue'
-import smsLogin from './components/sms-login.vue'
 
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/store/modules/user.js'
@@ -82,15 +76,6 @@ const loading = ref(false);
 onMounted(() => {
   const isClient = import.meta.env.VITE_IS_CLIENT === 'true';
   console.log("isClient === ",isClient);
-  if(window.electronAPI){
-    window.electronAPI.on('oauth-login-success', ({ code, state }) => {
-      if  (user.value.id) {
-        window.location.href = '/';
-      }else{
-        window.location.hash = `/auth/google?code=${code}&state=${state}`;
-      }
-    });
-  }
 })
 
 //判断是国内还是海外 VITE_REGION
@@ -113,8 +98,6 @@ const pageTitle = computed(() => {
       return t('auth.registerLemonAIAccount');
     case 'verify':
       return t('auth.verifyEmail');
-    case 'smsLogin':
-      return t('auth.loginToLemonAI');
     default:
       return t('auth.resetPassword');
   }
@@ -196,17 +179,6 @@ const handleLogin = async (values) => {
   }
 };
 
-//短信验证码登录 
-const handleLoginSMSCode = async (values) => { 
-  const res = await auth.loginSMSCode(values.phone, values.smsCode);
-  if (res.code === 200) {
-    message.success(t('auth.loginSuccessful'));
-    router.push({ name: 'lemon' });
-  }else{
-    message.error(res.message);
-    return;
-  }
-};
 const registerForm = ref({});
 // 处理注册
 const handleRegister = async (values) => {
@@ -285,26 +257,6 @@ const handleForgotPassword = async (values) => {
     }
   } catch (error) {
     message.error(t('auth.passwordResetFailed'));
-  } finally {
-    loading.value = false;
-  }
-};
-
-// 社交登录方法
-const handleGoogleLogin = () => {
-  try {
-    loading.value = true;
-    const isClient = import.meta.env.VITE_IS_CLIENT === 'true';
-    const redirectUri = isClient
-      ? import.meta.env.VITE_GOOGLE_REDIRECT_URI_ELECTRON// Electron 主进程处理
-      : 'http://localhost:5005/api/users/auth/google'; 
-    const clientId = '973572698649-hbp15ju1nhlsja1k2gbqktmrulk0hopp.apps.googleusercontent.com';
-    const scope = encodeURIComponent('profile email');
-    const responseType = 'code';
-    const googleAuthUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&access_type=offline&prompt=consent`;
-    window.location.href = googleAuthUrl;
-  } catch (error) {
-    message.error(t('auth.googleLoginFailed'));
   } finally {
     loading.value = false;
   }
