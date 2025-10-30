@@ -11,6 +11,7 @@ import pt from './lang/pt'
 import tr from './lang/tr'
 import tw from './lang/tw'
 import vi from './lang/vi'
+import nl from './lang/nl'
 
 const messages = {
   en,
@@ -23,15 +24,15 @@ const messages = {
   pt,
   tr,
   tw,
-  vi
+  vi,
+  nl,
 }
-const language = (navigator.language || 'en').toLocaleLowerCase() // 这是获取浏览器的语言
+const language = (navigator.language || 'en').toLocaleLowerCase() // Detect browser language
 const i18n = createI18n({
-  locale: localStorage.getItem('lang') || language.split('-')[0] || 'en', // 首先从缓存里拿，没有的话就用浏览器语言，
-  // locale: 'en', // 首先从缓存里拿，没有的话就用浏览器语言，
-  fallbackLocale: 'en', // 设置备用语言
+  locale: localStorage.getItem('lang') || language.split('-')[0] || 'en', // Prefer saved locale, otherwise use browser language
+  fallbackLocale: 'en', // Use English as fallback
   messages,
-  legacy: false, // 处理 Uncaught SyntaxError: Not available in legacy mode 的问题
+  legacy: false, // Prevent legacy-mode runtime warnings
 })
 
 export default i18n
