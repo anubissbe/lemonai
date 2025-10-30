@@ -21,8 +21,9 @@ import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
 
 const langList = ref([
-  { id: 1, type: 'en', title: "🇺🇸 English" },
-  { id: 2, type: 'zh', title: "🇨🇳 中文" },
+  { id: 1, type: 'en', title: '🇺🇸 English' },
+  { id: 2, type: 'zh', title: '🇨🇳 Chinese' },
+  { id: 3, type: 'nl', title: '🇳🇱 Nederlands' },
   // { id: 3, type: 'de' },
   // { id: 4, type: 'es' },
   // { id: 5, type: 'fr' },

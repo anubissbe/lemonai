@@ -3,7 +3,7 @@ export default {
   common: {
     cancel: "Cancel",
   },
-  //登录界面
+  // Login screen
   account: {
     usernameLabel: 'Username:',
     edit: 'Edit',
@@ -99,12 +99,12 @@ export default {
     keepOffline: "Keep offline",
     otherLogin: "Select other login method",
     subscribeModel: "You are currently selecting a subscription model, please login to use or select other models",
-    //您当前选择搜索服务是订阅服务，请前往登录后使用 或 选择其它服务
+    // Subscription search service notice
     subscribeService: "The search service you are currently selecting is a subscription service, please login to use or select other services",
     insufficientPoints: "Insufficient points",
     insufficientPointsPleaseGoToUpgradeOrPurchase: "You are using a subscription model or subscription search service, but your current points are insufficient, please go to upgrade or purchase",
   },
-  //会员
+  // Membership
   member: {
     selectPaymentMethod: "Select payment method",
     payWithCard: "Pay with Stripe",
@@ -249,9 +249,9 @@ export default {
       description: 'Scan to pay, instant confirmation, recommended for users in China'
     }
   },
-  //主界面
+  // Main interface
   lemon: {
-    // 首页
+    // Home
     welcome: {
       greeting: "Hello",
       question: "What can I do for you?",
@@ -267,7 +267,7 @@ export default {
       placeholder: "What can I do for you?",
       communityNote: "All tasks and websites displayed in the community are voluntarily shared by users. The platform will not display any content without the user's consent."
     },
-    //对话头部
+    // Conversation header
     chatHeader: {
       share: "Share",
       viewAllFiles: "View all files in this task",
@@ -280,7 +280,7 @@ export default {
       favorite: "Add to favorites",
       unfavorite: "Remove from favorites"
     },
-    //消息对话列表页
+    // Conversation list
     message: {
       runCommand: "Run bash command",
       readFile: "Read file",
@@ -298,7 +298,7 @@ export default {
       botInitialResponse: "Hello, I have received your request, I am analyzing this problem. Please wait.",
       botInitialPlan: "Planning in progress"
     },
-    // 输入框
+    // Input area
     input: {
       chooseModel: "choose model",
     },
@@ -327,7 +327,7 @@ export default {
         description: "Simple conversation chat"
       }
     },
-    //侧边栏
+    // Sidebar
     sidebar: {
       newTask: "New task",
       shortcutKey: "T",
@@ -343,7 +343,7 @@ export default {
       noChats: "Create a new task to start",
       searchPlaceholder: "Search tasks..."
     },
-    //文件查看器
+    // File viewer
     fileExplorer: {
       allFilesInTask: "All files in this task",
       noContent: "No content",
@@ -419,7 +419,7 @@ export default {
     }
 
   },
-  //设置界面
+  // Settings screen
   setting: {
     back: "Back",
     doneStep: "Done",
@@ -439,7 +439,7 @@ export default {
       mcpService: "MCP service",
       experience: 'Experience library',
       account: "Account",
-      //积分管理
+      // Points management
       integral: 'Integral',
       about: 'About',
     },
@@ -763,7 +763,7 @@ export default {
       license: "License",
       newVersionReleased: "Wow🔥 New version released! 🚀",
       version: "Version",
-      skipUpdate: "暂不更新",
+      skipUpdate: "Skip update",
       viewDetails: "View details",
       alreadyLatest: "Already the latest version"
     }
@@ -775,11 +775,11 @@ export default {
   replay: "Replay",
   task_finished: "Task finished",
   task_playing: "Task playing",
-  //点击此处跳转到设置页面
+  // Click here to open the settings page
   click_here_to_go_to_settings: "Click here to go to settings",
-  //请选择 模型
+  // Please select a model
   please_select_model: "Please select model",
-  //设置
+  // Settings
   settings: "Settings",
   loadingTip: "Loading order information...",
   backHome: "Back to home",
